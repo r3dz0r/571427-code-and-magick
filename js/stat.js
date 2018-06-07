@@ -52,27 +52,27 @@ window.renderStatistics = function (ctx, players, times) {
 
   var maxTime = getMaxElement(times);
 
-  function drawHistogram() {
-    var currentBarHeight = MAX_BAR_HEIGHT * times[i] / maxTime;
+  function drawHistogram(time, player, index) {
+    var currentBarHeight = MAX_BAR_HEIGHT * time / maxTime;
     var barOffsetY = MAX_BAR_HEIGHT - currentBarHeight;
 
-    ctx.fillStyle = randomColor(players[i]);
-    ctx.fillRect(CLOUD_X + 40 + 100 * i, 80 + barOffsetY + 10, barWidth, currentBarHeight);
+    ctx.fillStyle = randomColor(player, index);
+    ctx.fillRect(CLOUD_X + 40 + 100 * index, 80 + barOffsetY + 10, barWidth, currentBarHeight);
   }
 
-  function drawPlayerName() {
+  function drawPlayerName(player, index) {
     ctx.fillStyle = COLOR_BLACK;
-    ctx.fillText(players[i], (CLOUD_X + 40) + 100 * i, 260);
+    ctx.fillText(player, (CLOUD_X + 40) + 100 * index, 260);
   }
 
-  function drawPlayerTime() {
-    var currentBarHeight = MAX_BAR_HEIGHT * times[i] / maxTime;
-    ctx.fillText(Math.floor(times[i]), (CLOUD_X + 40) + 100 * i, CLOUD_HEIGHT - currentBarHeight - 40);
+  function drawPlayerTime(time, index) {
+    var currentBarHeight = MAX_BAR_HEIGHT * time / maxTime;
+    ctx.fillText(Math.floor(time), (CLOUD_X + 40) + 100 * index, CLOUD_HEIGHT - currentBarHeight - 40);
   }
 
   for (var i = 0; i < players.length; i++) {
-    drawPlayerName();
-    drawPlayerTime();
-    drawHistogram();
+    drawPlayerName(players[i], i);
+    drawPlayerTime(times[i], i);
+    drawHistogram(times[i], players[i], i);
   }
 };
