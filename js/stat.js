@@ -53,29 +53,26 @@ window.renderStatistics = function (ctx, players, times) {
   var maxTime = getMaxElement(times);
 
   function drawHistogram() {
+    var currentBarHeight = MAX_BAR_HEIGHT * times[i] / maxTime;
+    var barOffsetY = MAX_BAR_HEIGHT - currentBarHeight;
+
     ctx.fillStyle = randomColor(players[i]);
     ctx.fillRect(CLOUD_X + 40 + 100 * i, 80 + barOffsetY + 10, barWidth, currentBarHeight);
   }
 
-  function drawPlayerNames() {
+  function drawPlayerName() {
     ctx.fillStyle = COLOR_BLACK;
     ctx.fillText(players[i], (CLOUD_X + 40) + 100 * i, 260);
   }
 
-  function drawPlayerTimes() {
+  function drawPlayerTime() {
+    var currentBarHeight = MAX_BAR_HEIGHT * times[i] / maxTime;
     ctx.fillText(Math.floor(times[i]), (CLOUD_X + 40) + 100 * i, CLOUD_HEIGHT - currentBarHeight - 40);
   }
 
   for (var i = 0; i < players.length; i++) {
-    var currentBarHeight = MAX_BAR_HEIGHT * times[i] / maxTime;
-    var barOffsetY = MAX_BAR_HEIGHT - currentBarHeight;
-    drawPlayerNames();
-    drawPlayerTimes();
+    drawPlayerName();
+    drawPlayerTime();
     drawHistogram();
-    // ctx.fillStyle = COLOR_BLACK;
-    // ctx.fillText(players[i], (CLOUD_X + 40) + 100 * i, 260);
-    // ctx.fillText(Math.floor(times[i]), (CLOUD_X + 40) + 100 * i, 80);
-    // ctx.fillStyle = randomColor(players[i]);
-    // ctx.fillRect(CLOUD_X + 40 + 100 * i, 80 + barOffsetY + 10, barWidth, currentBarHeight);
   }
 };
