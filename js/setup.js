@@ -18,50 +18,28 @@ var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К
 var WIZARD_SURNAMES = ['Да марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLOR = [COLOR_BLACK, COLOR_RED, COLOR_BLUE, COLOR_YELLOW, COLOR_GREEN];
-var wizards = [
-  {
-    name: WIZARD_NAMES[0],
-    surname: WIZARD_SURNAMES[0],
-    coatColor: COAT_COLOR[0],
-    eyesColor: EYES_COLOR[0]
-  },
-  {
-    name: WIZARD_NAMES[1],
-    surname: WIZARD_SURNAMES[1],
-    coatColor: COAT_COLOR[1],
-    eyesColor: EYES_COLOR[1]
-  },
-  {
-    name: WIZARD_NAMES[2],
-    surname: WIZARD_SURNAMES[2],
-    coatColor: COAT_COLOR[2],
-    eyesColor: EYES_COLOR[2]
-  },
-  {
-    name: WIZARD_NAMES[3],
-    surname: WIZARD_SURNAMES[3],
-    coatColor: COAT_COLOR[3],
-    eyesColor: EYES_COLOR[3]
-  },
-  {
-    name: WIZARD_NAMES[4],
-    surname: WIZARD_SURNAMES[4],
-    coatColor: COAT_COLOR[4],
-    eyesColor: EYES_COLOR[4]
-  },
-  {
-    name: WIZARD_NAMES[5],
-    surname: WIZARD_SURNAMES[5],
-    coatColor: COAT_COLOR[5],
-    eyesColor: EYES_COLOR[5]
-  }
-];
+var wizards = [];
+
+var getRandomIndex = function (length) {
+  return Math.floor(Math.random() * length);
+};
+
+for (var index = 0; index < 4; index++) {
+  var wizardModel = {
+    name: WIZARD_NAMES[getRandomIndex(WIZARD_NAMES.length - 1)] + ' ' + WIZARD_SURNAMES[getRandomIndex(WIZARD_SURNAMES.length - 1)],
+    coatColor: COAT_COLOR[getRandomIndex(COAT_COLOR.length - 1)],
+    eyesColor: EYES_COLOR[getRandomIndex(EYES_COLOR.length - 1)]
+  };
+
+  wizards.push(wizardModel);
+}
 
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
+  wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
 
   return wizardElement;
 };
